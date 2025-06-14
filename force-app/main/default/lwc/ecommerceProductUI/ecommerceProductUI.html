@@ -1,0 +1,38 @@
+<template>
+    <div class="product-gallery">
+      <h1 class="gallery-title">Scary Decorations</h1>
+      <div class="product-grid">
+        <template for:each={products} for:item="product">
+          <div key={product.id} class="product-card">
+            <div class="product-image">
+              <img src={product.image} alt={product.name} />
+            </div>
+            <div class="product-info">
+              <h2 class="product-name">{product.name}</h2>
+              <div class="product-price">
+                <span class="current-price">${product.price}</span>
+              </div>
+              <div class="slds-grid slds-wrap slds-p-top_small">
+              <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2">
+                <lightning-button
+                  label="Add to Cart"
+                  class="add-to-cart-btn"
+                  variant="brand"
+                  onclick={handleAddToCart}
+                  data-id={product.id}>
+                </lightning-button></div>
+                <div class="slds-col slds-size_1-of-1 slds-medium-size_1-of-2" style="padding-left: 71px;"> 
+                    <input
+                      type="number"
+                      min="1"
+                      placeholder="0"
+                      class="quantity-input" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </template>
+      </div>
+    </div>
+  </template>
+  

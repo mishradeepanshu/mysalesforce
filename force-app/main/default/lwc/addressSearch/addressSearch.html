@@ -1,0 +1,92 @@
+<template>
+    <div class="slds-grid slds-wrap slds-m-left_small slds-m-top_large">
+        <div class="slds-col slds-size_9-of-12">
+            <div class="slds-page-header">
+                <div class="slds-page-header__row">
+                    <div class="slds-page-header__col-title">
+                        <div class="slds-media">
+                            <div class="slds-media__body">
+                                <div class="slds-page-header__name">
+                                    <div class="slds-page-header__name-title">
+                                        <h1>
+                                            <span class="slds-page-header__title slds-truncate" title="Address Information">Address Information</span>
+                                        </h1>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Address information input field list -->
+        
+        <div class="slds-col slds-size_9-of-12 slds-m-top_medium">
+            <lightning-input label="HQ Address" type="search" value={searchKey} placeholder="Search Address" onchange={openModal}></lightning-input>
+        </div>
+
+        <div class="slds-col slds-size_9-of-12 slds-m-top_x-small">
+            <lightning-textarea label="Street" value={addressDetails.Street__c}></lightning-textarea>
+        </div>
+
+        <div class="slds-col slds-size_6-of-12 slds-m-top_x-small">
+            <lightning-input label="City" value={addressDetails.City__c}></lightning-input>
+        </div>
+
+        <div class="slds-col slds-size_3-of-12 slds-m-left_xxx-small slds-m-top_x-small">
+            <lightning-input label="State/Province" value={addressDetails.State__c}></lightning-input>
+        </div>
+
+        <div class="slds-col slds-size_6-of-12 slds-m-top_x-small">
+            <lightning-input label="Zip/Postal Code" value={addressDetails.PostalCode__c}></lightning-input>
+        </div>
+
+        <div class="slds-col slds-size_3-of-12 slds-m-left_xxx-small slds-m-top_x-small">
+            <lightning-input label="Country" value={addressDetails.Country__c}></lightning-input>
+        </div>
+
+        <div class="slds-col slds-size_3-of-12 slds-m-top_medium">
+            <lightning-button label="Save" variant="brand" onclick={saveAddress}></lightning-button>
+        </div>
+    </div>
+
+    <!-- Modal for address search -->
+    <template if:true={showModal}>
+        <section role="dialog" aria-labelledby="modal-heading-01" aria-modal="true" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <button class="slds-button slds-button_icon slds-modal__close" title="Close" onclick={closeModal}>
+                        <lightning-icon icon-name="utility:close"></lightning-icon>
+                    </button>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Address Search</h2>
+                </header>
+
+                <div class="slds-modal__content">
+                    <lightning-input label="Search Address" value={searchKey} onchange={handleKeyPress}></lightning-input>
+
+                    <!-- Display address list if available -->
+                    <template if:true={addressList}>
+                        <ul class="slds-listbox slds-listbox_vertical slds-dropdown slds-dropdown_fluid">
+                            <template for:each={addressList} for:item="address">
+                                <li key={address.place_id} class="slds-listbox__item" data-value={address.place_id} onclick={selectAddress}>
+                                    <div class="slds-media slds-listbox__option">
+                                        <span class="slds-media__body">
+                                            <div>{address.main_text}</div>
+                                            <div>{address.secondary_text}</div>
+                                        </span>
+                                    </div>
+                                </li>
+                            </template>
+                        </ul>
+                    </template>
+                </div>
+
+                <footer class="slds-modal__footer">
+                    <lightning-button variant="neutral" label="Cancel" onclick={closeModal}></lightning-button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </template>
+</template>
