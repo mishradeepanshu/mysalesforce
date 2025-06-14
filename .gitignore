@@ -43,3 +43,49 @@ $RECYCLE.BIN/
 **/__pycache__/
 **/.venv/
 **/venv/
+
+# Salesforce specific files
+**/*.sfdx
+**/*.sf
+.sf/
+.sfdx/
+sfdx-source/
+sfdx-project.json
+sfdx-project.json.lock
+sfdx-project.json.bak
+sfdx-project.json.old
+sfdx-project.json.new
+sfdx-project.json.tmp
+sfdx-project.json.bak
+sfdx-project.json.old
+sfdx-project.json.new
+sfdx-project.json.tmp
+
+# Node modules
+node_modules/
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+
+# IDE specific files
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Local development
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

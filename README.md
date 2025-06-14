@@ -1,18 +1,93 @@
-# Salesforce DX Project: Next Steps
+# Salesforce Project
 
-Now that you’ve created a Salesforce DX project, what’s next? Here are some documentation resources to get you started.
+This repository contains a Salesforce project with Lightning Web Components (LWC) and Apex classes.
 
-## How Do You Plan to Deploy Your Changes?
+## Project Structure
 
-Do you want to deploy a set of changes, or create a self-contained application? Choose a [development model](https://developer.salesforce.com/tools/vscode/en/user-guide/development-models).
+```
+├── force-app/
+│   └── main/
+│       └── default/
+│           ├── classes/          # Apex classes
+│           ├── lwc/             # Lightning Web Components
+│           └── aura/            # Aura components
+├── scripts/                     # Utility scripts
+├── config/                      # Configuration files
+└── manifest/                    # Package manifest
+```
 
-## Configure Your Salesforce DX Project
+## Prerequisites
 
-The `sfdx-project.json` file contains useful configuration information for your project. See [Salesforce DX Project Configuration](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_ws_config.htm) in the _Salesforce DX Developer Guide_ for details about this file.
+- Node.js (v16 or later)
+- Salesforce CLI
+- Git
 
-## Read All About It
+## Setup Instructions
 
-- [Salesforce Extensions Documentation](https://developer.salesforce.com/tools/vscode/)
-- [Salesforce CLI Setup Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm)
-- [Salesforce DX Developer Guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_dev.meta/sfdx_dev/sfdx_dev_intro.htm)
-- [Salesforce CLI Command Reference](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_reference.meta/sfdx_cli_reference/cli_reference.htm)
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mishradeepanshu/mysalesforce.git
+   cd mysalesforce
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Authenticate with Salesforce:
+   ```bash
+   sf org login web
+   ```
+
+4. Create a scratch org:
+   ```bash
+   sf org create scratch -f config/project-scratch-def.json -a myscratchorg
+   ```
+
+## Development Workflow
+
+1. Create a new branch for your feature:
+   ```bash
+   git checkout -b feature/your-feature-name
+   ```
+
+2. Make your changes and commit them:
+   ```bash
+   git add .
+   git commit -m "Your commit message"
+   ```
+
+3. Push your changes:
+   ```bash
+   git push origin feature/your-feature-name
+   ```
+
+4. Create a Pull Request to merge into `develop`
+
+## CI/CD Pipeline
+
+This project uses GitHub Actions for continuous integration and deployment. The pipeline:
+
+1. Runs on push to `main` and `develop` branches
+2. Runs on pull requests to `main` and `develop`
+3. Deploys to Salesforce org
+4. Runs Apex tests
+
+## Available Scripts
+
+- `npm run test`: Run Jest tests
+- `npm run lint`: Run ESLint
+- `npm run format`: Format code with Prettier
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
