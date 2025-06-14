@@ -27,22 +27,28 @@ jobs:
           SF_PASSWORD: ${{ secrets.SF_PASSWORD }}
           SF_SECURITY_TOKEN: ${{ secrets.SF_SECURITY_TOKEN }}
           SF_CONSUMER_KEY: ${{ secrets.SF_CONSUMER_KEY }}
+          SF_INSTANCE_URL: 'https://login.salesforce.com'
         run: |
-          sf org login web --instance-url https://login.salesforce.com --set-default-dev-hub
+          echo "Authenticating to Salesforce..."
+          sf org login web --instance-url $SF_INSTANCE_URL --set-default-dev-hub
           
       - name: Create Scratch Org
         run: |
+          echo "Creating scratch org..."
           sf org create scratch -f config/project-scratch-def.json -a myscratchorg -d 7
           
       - name: Deploy to Scratch Org
         run: |
+          echo "Deploying to scratch org..."
           sf project deploy start --source-dir force-app --target-org myscratchorg
           
       - name: Run Tests
         run: |
+          echo "Running tests..."
           sf apex run test --target-org myscratchorg
           
       - name: Delete Scratch Org
         if: always()
         run: |
+          echo "Cleaning up scratch org..."
           sf org delete scratch -o myscratchorg 
